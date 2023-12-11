@@ -3,6 +3,9 @@ using UnityEngine;
 public class Player_Controller : MonoBehaviour
 {
     public float for_speed;
+
+    public float side_Speed;
+
     public Transform center_pos;
     public Transform left_pos;
     public Transform right_pos;
@@ -19,22 +22,36 @@ public class Player_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + for_speed * Time.deltaTime);
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + for_speed * Time.deltaTime);
 
         if (current_pos == 0)
         {
-            transform.position = new Vector3(0f, transform.position.y, transform.position.z);
+            /*transform.position = new Vector3(0f, transform.position.y, transform.position.z);*/
 
+            /* Vector3 newpos = center_pos.position - transform.position;
+             transform.Translate(newpos.normalized * side_Speed * Time.deltaTime, Space.World);*/
+
+            transform.position = Vector3.Lerp(transform.position, new Vector3(center_pos.position.x, transform.position.y, transform.position.z), for_speed * Time.deltaTime);
         }
         else if (current_pos == 1)
         {
 
-            transform.position = new Vector3(-2.25f, transform.position.y, transform.position.z);
+            /*transform.position = new Vector3(-2.25f, transform.position.y, transform.position.z);*/
+
+            /*Vector3 newpos = left_pos.position - transform.position;
+            transform.Translate(newpos.normalized * side_Speed * Time.deltaTime, Space.World);*/
+
+            transform.position = Vector3.Lerp(transform.position, new Vector3(left_pos.position.x, transform.position.y, transform.position.z), for_speed * Time.deltaTime);
 
         }
         else if (current_pos == 2)
         {
-            transform.position = new Vector3(2.25f, transform.position.y, transform.position.z);
+            /*transform.position = new Vector3(2.25f, transform.position.y, transform.position.z);*/
+
+            /*Vector3 newpos = right_pos.position - transform.position;
+            transform.Translate(newpos.normalized * side_Speed * Time.deltaTime, Space.World);*/
+
+            transform.position = Vector3.Lerp(transform.position, new Vector3(right_pos.position.x, transform.position.y, transform.position.z), for_speed * Time.deltaTime);
         }
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
